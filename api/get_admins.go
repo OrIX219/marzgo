@@ -6,21 +6,21 @@ import (
 	"github.com/OrIX219/marzgo/api/responses"
 )
 
-type GetAdminsParams struct {
+type GetAdmins struct {
 	Offset   int
 	Limit    int
 	Username string
 }
 
-func (GetAdminsParams) Method() string {
+func (GetAdmins) Method() string {
 	return "GET"
 }
 
-func (GetAdminsParams) Endpoint() string {
+func (GetAdmins) Endpoint() string {
 	return "api/admins"
 }
 
-func (c GetAdminsParams) Params() (RequestParams, error) {
+func (c GetAdmins) Params() (RequestParams, error) {
 	params := make(RequestParams)
 	params.AddIntNonZero("offset", c.Offset)
 	params.AddIntNonZero("limit", c.Limit)
@@ -29,7 +29,7 @@ func (c GetAdminsParams) Params() (RequestParams, error) {
 	return params, nil
 }
 
-func (c *Client) GetAdmins(params GetAdminsParams) ([]responses.Admin, error) {
+func (c *Client) GetAdmins(params GetAdmins) ([]responses.Admin, error) {
 	admins := []responses.Admin{}
 	resp, err := c.Request(params)
 	if err != nil {

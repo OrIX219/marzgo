@@ -4,23 +4,23 @@ import (
 	"fmt"
 )
 
-type RemoveAdminParams struct {
+type RemoveAdmin struct {
 	Username string
 }
 
-func (RemoveAdminParams) Method() string {
+func (RemoveAdmin) Method() string {
 	return "DELETE"
 }
 
-func (p RemoveAdminParams) Endpoint() string {
+func (p RemoveAdmin) Endpoint() string {
 	return fmt.Sprintf("api/admin/%s", p.Username)
 }
 
-func (RemoveAdminParams) Params() (RequestParams, error) {
+func (RemoveAdmin) Params() (RequestParams, error) {
 	return nil, nil
 }
 
-func (c *Client) RemoveAdmin(params RemoveAdminParams) error {
+func (c *Client) RemoveAdmin(params RemoveAdmin) error {
 	_, err := c.Request(params)
 	if err != nil {
 		return err

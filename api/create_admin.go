@@ -6,21 +6,21 @@ import (
 	"github.com/OrIX219/marzgo/api/responses"
 )
 
-type CreateAdminParams struct {
+type CreateAdmin struct {
 	Username string
 	Password string
 	IsSudo   bool
 }
 
-func (CreateAdminParams) Method() string {
+func (CreateAdmin) Method() string {
 	return "POST"
 }
 
-func (CreateAdminParams) Endpoint() string {
+func (CreateAdmin) Endpoint() string {
 	return "api/admin"
 }
 
-func (c CreateAdminParams) Params() (RequestParams, error) {
+func (c CreateAdmin) Params() (RequestParams, error) {
 	params := make(RequestParams)
 	params.AddString("username", c.Username)
 	params.AddString("password", c.Password)
@@ -29,7 +29,7 @@ func (c CreateAdminParams) Params() (RequestParams, error) {
 	return params, nil
 }
 
-func (c *Client) CreateAdmin(params CreateAdminParams) (responses.Admin, error) {
+func (c *Client) CreateAdmin(params CreateAdmin) (responses.Admin, error) {
 	admin := responses.Admin{}
 	resp, err := c.Request(params)
 	if err != nil {
