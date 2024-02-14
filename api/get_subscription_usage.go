@@ -8,21 +8,21 @@ import (
 	"github.com/OrIX219/marzgo/api/models"
 )
 
-type GetUserUsage struct {
+type GetSubscriptionUsage struct {
 	Token string
 	Start time.Time
 	End   time.Time
 }
 
-func (GetUserUsage) Method() string {
+func (GetSubscriptionUsage) Method() string {
 	return "GET"
 }
 
-func (p GetUserUsage) Endpoint() string {
+func (p GetSubscriptionUsage) Endpoint() string {
 	return fmt.Sprintf("sub/%s/usage", p.Token)
 }
 
-func (p GetUserUsage) Params() (RequestParams, error) {
+func (p GetSubscriptionUsage) Params() (RequestParams, error) {
 	params := make(RequestParams)
 	params.AddTimeNonZero("start", p.Start)
 	params.AddTimeNonZero("end", p.End)
@@ -30,11 +30,11 @@ func (p GetUserUsage) Params() (RequestParams, error) {
 	return params, nil
 }
 
-func (GetUserUsage) Headers() (RequestParams, error) {
+func (GetSubscriptionUsage) Headers() (RequestParams, error) {
 	return nil, nil
 }
 
-func (c *Client) GetUserUsage(params GetUserUsage) (models.UserUsagesResponse, error) {
+func (c *Client) GetSubscriptionUsage(params GetSubscriptionUsage) (models.UserUsagesResponse, error) {
 	var usages models.UserUsagesResponse
 	resp, err := c.Request(params)
 	if err != nil {
