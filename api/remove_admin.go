@@ -20,6 +20,10 @@ func (RemoveAdmin) Params() (RequestParams, error) {
 	return nil, nil
 }
 
+func (RemoveAdmin) Headers() (RequestParams, error) {
+	return nil, nil
+}
+
 func (c *Client) RemoveAdmin(params RemoveAdmin) error {
 	_, err := c.Request(params)
 	if err != nil {

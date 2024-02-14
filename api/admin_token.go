@@ -3,16 +3,16 @@ package api
 import (
 	"encoding/json"
 
-	"github.com/OrIX219/marzgo/api/responses"
+	"github.com/OrIX219/marzgo/api/models"
 )
 
-func (c *Client) AdminToken() (responses.Token, error) {
-	var token responses.Token
+func (c *Client) AdminToken() (models.Token, error) {
+	var token models.Token
 	resp, err := c.MakeRequest("POST", "api/admin/token", ContentTypeUrlEncoded,
 		RequestParams{
 			"username": c.Username,
 			"password": c.Password,
-		})
+		}, nil)
 	if err != nil {
 		return token, err
 	}

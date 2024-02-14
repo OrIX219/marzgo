@@ -28,7 +28,11 @@ func (c *Client) Request(params Params) (json.RawMessage, error) {
 	if err != nil {
 		return nil, err
 	}
-	return c.MakeRequest(params.Method(), params.Endpoint(), ContentTypeJson, reqParams)
+	reqHeaders, err := params.Headers()
+	if err != nil {
+		return nil, err
+	}
+	return c.MakeRequest(params.Method(), params.Endpoint(), ContentTypeJson, reqParams, reqHeaders)
 }
 
 func (c *Client) addAuthHeader(req *http.Request) {
@@ -39,7 +43,7 @@ func (c *Client) addAuthHeader(req *http.Request) {
 }
 
 func (c *Client) MakeRequest(method, endpoint string,
-	contentType ContentType, params RequestParams) (json.RawMessage, error) {
+	contentType ContentType, params, headers RequestParams) (json.RawMessage, error) {
 	url := fmt.Sprint(c.APIBaseUrl, endpoint)
 
 	var body io.Reader
@@ -59,6 +63,9 @@ func (c *Client) MakeRequest(method, endpoint string,
 
 	c.addAuthHeader(req)
 	req.Header.Set("Content-Type", contentType.String())
+	for k, v := range headers {
+		req.Header.Set(k, v)
+	}
 	if method == "GET" {
 		req.URL.RawQuery = params.URLEncoded()
 	}

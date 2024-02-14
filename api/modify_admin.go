@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/OrIX219/marzgo/api/responses"
+	"github.com/OrIX219/marzgo/api/models"
 )
 
 type ModifyAdmin struct {
@@ -29,8 +29,12 @@ func (c ModifyAdmin) Params() (RequestParams, error) {
 	return params, nil
 }
 
-func (c *Client) ModifyAdmin(params ModifyAdmin) (responses.Admin, error) {
-	admin := responses.Admin{}
+func (ModifyAdmin) Headers() (RequestParams, error) {
+	return nil, nil
+}
+
+func (c *Client) ModifyAdmin(params ModifyAdmin) (models.Admin, error) {
+	admin := models.Admin{}
 	resp, err := c.Request(params)
 	if err != nil {
 		return admin, err

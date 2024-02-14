@@ -5,12 +5,14 @@ import (
 	"net/url"
 	"reflect"
 	"strconv"
+	"time"
 )
 
 type Params interface {
 	Method() string
 	Endpoint() string
 	Params() (RequestParams, error)
+	Headers() (RequestParams, error)
 }
 
 type RequestParams map[string]string
@@ -57,6 +59,13 @@ func (p RequestParams) AddFloatNonZero(key string, value float64) {
 
 func (p RequestParams) AddBool(key string, value bool) {
 	p[key] = strconv.FormatBool(value)
+}
+
+func (p RequestParams) AddTimeNonZero(key string, value time.Time) {
+	zero := time.Time{}
+	if value != zero {
+		p[key] = value.String()
+	}
 }
 
 func (p RequestParams) AddAny(key string, value any) error {

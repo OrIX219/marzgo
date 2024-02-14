@@ -3,7 +3,7 @@ package api
 import (
 	"encoding/json"
 
-	"github.com/OrIX219/marzgo/api/responses"
+	"github.com/OrIX219/marzgo/api/models"
 )
 
 type GetAdmins struct {
@@ -29,8 +29,12 @@ func (c GetAdmins) Params() (RequestParams, error) {
 	return params, nil
 }
 
-func (c *Client) GetAdmins(params GetAdmins) ([]responses.Admin, error) {
-	admins := []responses.Admin{}
+func (GetAdmins) Headers() (RequestParams, error) {
+	return nil, nil
+}
+
+func (c *Client) GetAdmins(params GetAdmins) ([]models.Admin, error) {
+	admins := []models.Admin{}
 	resp, err := c.Request(params)
 	if err != nil {
 		return admins, err
