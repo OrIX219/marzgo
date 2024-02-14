@@ -16,7 +16,7 @@ func (p RemoveAdminParams) Endpoint() string {
 	return fmt.Sprintf("api/admin/%s", p.Username)
 }
 
-func (c RemoveAdminParams) Params() (RequestParams, error) {
+func (RemoveAdminParams) Params() (RequestParams, error) {
 	return nil, nil
 }
 

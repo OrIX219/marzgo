@@ -58,11 +58,11 @@ func (c *Client) MakeRequest(method, endpoint string,
 	}
 
 	c.addAuthHeader(req)
+	req.Header.Set("Content-Type", contentType.String())
 	if method == "GET" {
 		req.URL.RawQuery = params.URLEncoded()
 	}
 
-	req.Header.Set("Content-Type", contentType.String())
 	resp, err := c.HTTPClient.Do(req)
 	if err != nil {
 		return nil, err

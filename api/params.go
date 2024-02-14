@@ -15,25 +15,41 @@ type Params interface {
 
 type RequestParams map[string]string
 
-func (p RequestParams) AddNonEmpty(key, value string) {
+func (p RequestParams) AddString(key, value string) {
+	p[key] = value
+}
+
+func (p RequestParams) AddStringNonEmpty(key, value string) {
 	if value != "" {
 		p[key] = value
 	}
 }
 
-func (p RequestParams) AddNonZero(key string, value int) {
+func (p RequestParams) AddInt(key string, value int) {
+	p[key] = strconv.Itoa(value)
+}
+
+func (p RequestParams) AddIntNonZero(key string, value int) {
 	if value != 0 {
 		p[key] = strconv.Itoa(value)
 	}
 }
 
-func (p RequestParams) AddNonZero64(key string, value int64) {
+func (p RequestParams) AddInt64(key string, value int64) {
+	p[key] = strconv.FormatInt(value, 10)
+}
+
+func (p RequestParams) AddInt64NonZero(key string, value int64) {
 	if value != 0 {
 		p[key] = strconv.FormatInt(value, 10)
 	}
 }
 
-func (p RequestParams) AddNonZeroFloat(key string, value float64) {
+func (p RequestParams) AddFloat(key string, value float64) {
+	p[key] = strconv.FormatFloat(value, 'f', 6, 64)
+}
+
+func (p RequestParams) AddFloatNonZero(key string, value float64) {
 	if value != 0 {
 		p[key] = strconv.FormatFloat(value, 'f', 6, 64)
 	}

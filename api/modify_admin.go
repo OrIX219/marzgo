@@ -23,7 +23,7 @@ func (p ModifyAdminParams) Endpoint() string {
 
 func (c ModifyAdminParams) Params() (RequestParams, error) {
 	params := make(RequestParams)
-	params.AddNonEmpty("password", c.Password)
+	params.AddString("password", c.Password)
 	params.AddBool("is_sudo", c.IsSudo)
 
 	return params, nil

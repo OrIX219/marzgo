@@ -22,9 +22,9 @@ func (GetAdminsParams) Endpoint() string {
 
 func (c GetAdminsParams) Params() (RequestParams, error) {
 	params := make(RequestParams)
-	params.AddNonZero("offset", c.Offset)
-	params.AddNonZero("limit", c.Limit)
-	params.AddNonEmpty("username", c.Username)
+	params.AddIntNonZero("offset", c.Offset)
+	params.AddIntNonZero("limit", c.Limit)
+	params.AddStringNonEmpty("username", c.Username)
 
 	return params, nil
 }
