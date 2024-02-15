@@ -22,8 +22,8 @@ func (CreateAdmin) Endpoint() string {
 
 func (c CreateAdmin) Params() (RequestParams, error) {
 	params := make(RequestParams)
-	params.AddString("username", c.Username)
-	params.AddString("password", c.Password)
+	params.AddStringNonEmpty("username", c.Username)
+	params.AddStringNonEmpty("password", c.Password)
 	params.AddBool("is_sudo", c.IsSudo)
 
 	return params, nil
