@@ -73,7 +73,9 @@ func (c *Client) MakeRequest(method, endpoint string, contentType ContentType,
 	for k, v := range headers {
 		req.Header.Set(k, v)
 	}
-	req.URL.RawQuery = urlParams.Encode()
+	if urlParams != nil {
+		req.URL.RawQuery = urlParams.Encode()
+	}
 
 	resp, err := c.HTTPClient.Do(req)
 	if err != nil {
