@@ -20,16 +20,20 @@ func (GetAdmins) Endpoint() string {
 	return "api/admins"
 }
 
-func (c GetAdmins) Params() (RequestParams, error) {
-	params := make(RequestParams)
-	params.AddIntNonZero("offset", c.Offset)
-	params.AddIntNonZero("limit", c.Limit)
-	params.AddStringNonEmpty("username", c.Username)
+func (GetAdmins) Body() (BodyParams, error) {
+	return nil, nil
+}
+
+func (p GetAdmins) Url() (UrlParams, error) {
+	params := make(UrlParams)
+	params.AddIntNonZero("offset", p.Offset)
+	params.AddIntNonZero("limit", p.Limit)
+	params.AddStringNonEmpty("username", p.Username)
 
 	return params, nil
 }
 
-func (GetAdmins) Headers() (RequestParams, error) {
+func (GetAdmins) Headers() (Headers, error) {
 	return nil, nil
 }
 

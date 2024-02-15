@@ -19,11 +19,15 @@ func (p UserSubscriptionInfo) Endpoint() string {
 	return fmt.Sprintf("sub/%s/info", p.Token)
 }
 
-func (p UserSubscriptionInfo) Params() (RequestParams, error) {
+func (UserSubscriptionInfo) Body() (BodyParams, error) {
 	return nil, nil
 }
 
-func (p UserSubscriptionInfo) Headers() (RequestParams, error) {
+func (UserSubscriptionInfo) Url() (UrlParams, error) {
+	return nil, nil
+}
+
+func (UserSubscriptionInfo) Headers() (Headers, error) {
 	return nil, nil
 }
 

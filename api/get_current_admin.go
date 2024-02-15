@@ -8,7 +8,7 @@ import (
 
 func (c *Client) GetCurrentAdmin() (models.Admin, error) {
 	var admin models.Admin
-	resp, err := c.MakeRequest("GET", "api/admin/", ContentTypeNone, nil, nil)
+	resp, err := c.MakeRequest("GET", "api/admin/", ContentTypeNone, nil, nil, nil)
 	if err != nil {
 		return admin, err
 	}

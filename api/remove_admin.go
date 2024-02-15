@@ -16,11 +16,15 @@ func (p RemoveAdmin) Endpoint() string {
 	return fmt.Sprintf("api/admin/%s", p.Username)
 }
 
-func (RemoveAdmin) Params() (RequestParams, error) {
+func (RemoveAdmin) Body() (BodyParams, error) {
 	return nil, nil
 }
 
-func (RemoveAdmin) Headers() (RequestParams, error) {
+func (RemoveAdmin) Url() (UrlParams, error) {
+	return nil, nil
+}
+
+func (RemoveAdmin) Headers() (Headers, error) {
 	return nil, nil
 }
 

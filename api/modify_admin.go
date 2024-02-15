@@ -21,15 +21,19 @@ func (p ModifyAdmin) Endpoint() string {
 	return fmt.Sprintf("api/admin/%s", p.Username)
 }
 
-func (c ModifyAdmin) Params() (RequestParams, error) {
-	params := make(RequestParams)
+func (c ModifyAdmin) Body() (BodyParams, error) {
+	params := make(BodyParams)
 	params.AddStringNonEmpty("password", c.Password)
 	params.AddBool("is_sudo", c.IsSudo)
 
 	return params, nil
 }
 
-func (ModifyAdmin) Headers() (RequestParams, error) {
+func (ModifyAdmin) Url() (UrlParams, error) {
+	return nil, nil
+}
+
+func (ModifyAdmin) Headers() (Headers, error) {
 	return nil, nil
 }
 
