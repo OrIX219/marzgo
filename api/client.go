@@ -7,6 +7,8 @@ import (
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/OrIX219/marzgo/api/errors"
 )
 
 type HTTPClient interface {
@@ -81,8 +83,28 @@ func (c *Client) MakeRequest(method, endpoint string,
 		return nil, err
 	}
 
+	var respErr error
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%s", raw)
+		switch resp.StatusCode {
+		case http.StatusUnprocessableEntity:
+			var ve errors.ValidationError
+			err = json.Unmarshal(raw, &ve)
+			respErr = ve
+		case http.StatusForbidden:
+			respErr = errors.NewForbidden(endpoint)
+		case http.StatusNotFound:
+			respErr = errors.NewNotFound(endpoint)
+		case http.StatusConflict:
+			respErr = errors.NewAlreadyExists()
+		default:
+			respErr = fmt.Errorf("%s", raw)
+		}
+		if err != nil {
+			return nil, err
+		}
+	}
+	if respErr != nil {
+		return nil, respErr
 	}
 
 	return raw, nil
