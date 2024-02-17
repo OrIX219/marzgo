@@ -7,26 +7,10 @@ import (
 	"github.com/OrIX219/marzgo/api/models"
 )
 
-type ModifyAdmin struct {
-	Username string
-	Password string
-	IsSudo   bool
-}
-
-func (ModifyAdmin) Method() string {
-	return "PUT"
-}
-
-func (p ModifyAdmin) Endpoint() string {
-	return fmt.Sprintf("api/admin/%s", p.Username)
-}
+type ModifyAdmin models.AdminModify
 
 func (c ModifyAdmin) Body() (RequestBody, error) {
-	params := make(RequestBody)
-	params.AddStringNonEmpty("password", c.Password)
-	params.AddBool("is_sudo", c.IsSudo)
-
-	return params, nil
+	return models.AdminModify(c), nil
 }
 
 func (ModifyAdmin) Query() (QueryParams, error) {
@@ -37,9 +21,9 @@ func (ModifyAdmin) Headers() (Headers, error) {
 	return nil, nil
 }
 
-func (c *Client) ModifyAdmin(params ModifyAdmin) (models.Admin, error) {
+func (c *Client) ModifyAdmin(username string, params ModifyAdmin) (models.Admin, error) {
 	admin := models.Admin{}
-	resp, err := c.Request(params)
+	resp, err := c.Request("PUT", fmt.Sprintf("api/admin/%s", username), params)
 	if err != nil {
 		return admin, err
 	}

@@ -12,14 +12,6 @@ type GetAdmins struct {
 	Username string
 }
 
-func (GetAdmins) Method() string {
-	return "GET"
-}
-
-func (GetAdmins) Endpoint() string {
-	return "api/admins"
-}
-
 func (GetAdmins) Body() (RequestBody, error) {
 	return nil, nil
 }
@@ -39,7 +31,7 @@ func (GetAdmins) Headers() (Headers, error) {
 
 func (c *Client) GetAdmins(params GetAdmins) ([]models.Admin, error) {
 	admins := []models.Admin{}
-	resp, err := c.Request(params)
+	resp, err := c.Request("GET", "api/admins", params)
 	if err != nil {
 		return admins, err
 	}

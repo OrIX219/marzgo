@@ -1,16 +1,12 @@
 package api
 
 import (
-	"encoding/json"
 	"net/url"
-	"reflect"
 	"strconv"
 	"time"
 )
 
 type Params interface {
-	Method() string
-	Endpoint() string
 	Body() (RequestBody, error)
 	Query() (QueryParams, error)
 	Headers() (Headers, error)
@@ -18,144 +14,9 @@ type Params interface {
 
 type Headers map[string]string
 
-type RequestBody map[string]string
-
-func (p RequestBody) AddString(key, value string) {
-	p[key] = value
-}
-
-func (p RequestBody) AddStringNonEmpty(key, value string) {
-	if value != "" {
-		p[key] = value
-	}
-}
-
-func (p RequestBody) AddStringSliceNonEmpty(key string, value []string) {
-	if len(value) != 0 {
-		// Ingoring error
-		// What can go wrong here? Clueless
-		b, _ := json.Marshal(value)
-		p[key] = string(b)
-	}
-}
-
-func (p RequestBody) AddInt(key string, value int) {
-	p[key] = strconv.Itoa(value)
-}
-
-func (p RequestBody) AddIntNonZero(key string, value int) {
-	if value != 0 {
-		p[key] = strconv.Itoa(value)
-	}
-}
-
-func (p RequestBody) AddIntSliceNonEmpty(key string, value []int) {
-	if len(value) != 0 {
-		// Ingoring error
-		// What can go wrong here? Clueless
-		b, _ := json.Marshal(value)
-		p[key] = string(b)
-	}
-}
-
-func (p RequestBody) AddInt64(key string, value int64) {
-	p[key] = strconv.FormatInt(value, 10)
-}
-
-func (p RequestBody) AddInt64NonZero(key string, value int64) {
-	if value != 0 {
-		p[key] = strconv.FormatInt(value, 10)
-	}
-}
-
-func (p RequestBody) AddInt64SliceNonEmpty(key string, value []int64) {
-	if len(value) != 0 {
-		// Ingoring error
-		// What can go wrong here? Clueless
-		b, _ := json.Marshal(value)
-		p[key] = string(b)
-	}
-}
-
-func (p RequestBody) AddFloat(key string, value float64) {
-	p[key] = strconv.FormatFloat(value, 'f', 6, 64)
-}
-
-func (p RequestBody) AddFloatNonZero(key string, value float64) {
-	if value != 0 {
-		p[key] = strconv.FormatFloat(value, 'f', 6, 64)
-	}
-}
-
-func (p RequestBody) AddFloatSliceNonEmpty(key string, value []float64) {
-	if len(value) != 0 {
-		// Ingoring error
-		// What can go wrong here? Clueless
-		b, _ := json.Marshal(value)
-		p[key] = string(b)
-	}
-}
-
-func (p RequestBody) AddBool(key string, value bool) {
-	p[key] = strconv.FormatBool(value)
-}
-
-func (p RequestBody) AddBoolSliceNonEmpty(key string, value []bool) {
-	if len(value) != 0 {
-		// Ingoring error
-		// What can go wrong here? Clueless
-		b, _ := json.Marshal(value)
-		p[key] = string(b)
-	}
-}
-
-func (p RequestBody) AddTimeNonZero(key string, value time.Time) {
-	zero := time.Time{}
-	if value != zero {
-		p[key] = value.String()
-	}
-}
-
-func (p RequestBody) AddTimeSliceNonEmpty(key string, value []time.Time) {
-	if len(value) != 0 {
-		// Ingoring error
-		// What can go wrong here? Clueless
-		b, _ := json.Marshal(value)
-		p[key] = string(b)
-	}
-}
-
-func (p RequestBody) AddAny(key string, value any) error {
-	if value == nil {
-		return nil
-	}
-	val := reflect.ValueOf(value)
-	if (val.Kind() == reflect.Ptr && val.IsNil()) ||
-		(val.Kind() == reflect.Slice && val.IsZero()) {
-		return nil
-	}
-
-	b, err := json.Marshal(value)
-	if err != nil {
-		return err
-	}
-
-	p[key] = string(b)
-
-	return nil
-}
-
-func (p RequestBody) JSONEncoded() []byte {
-	buf, _ := json.Marshal(p)
-	return buf
-}
-
-func (p RequestBody) URLEncoded() string {
-	values := url.Values{}
-	for k, v := range p {
-		values.Set(k, v)
-	}
-	return values.Encode()
+type RequestBody interface {
+	JSONEncoded() []byte
+	URLEncoded() string
 }
 
 type QueryParams map[string][]string

@@ -7,17 +7,7 @@ import (
 	"github.com/OrIX219/marzgo/api/models"
 )
 
-type UserSubscriptionInfo struct {
-	Token string
-}
-
-func (UserSubscriptionInfo) Method() string {
-	return "GET"
-}
-
-func (p UserSubscriptionInfo) Endpoint() string {
-	return fmt.Sprintf("sub/%s/info", p.Token)
-}
+type UserSubscriptionInfo struct{}
 
 func (UserSubscriptionInfo) Body() (RequestBody, error) {
 	return nil, nil
@@ -31,9 +21,9 @@ func (UserSubscriptionInfo) Headers() (Headers, error) {
 	return nil, nil
 }
 
-func (c *Client) UserSubscriptionInfo(params UserSubscriptionInfo) (models.UserResponse, error) {
+func (c *Client) UserSubscriptionInfo(token string) (models.UserResponse, error) {
 	var sub models.UserResponse
-	resp, err := c.Request(params)
+	resp, err := c.Request("GET", fmt.Sprintf("sub/%s/info", token), UserSubscriptionInfo{})
 	if err != nil {
 		return sub, err
 	}

@@ -25,7 +25,7 @@ type Client struct {
 	HTTPClient HTTPClient
 }
 
-func (c *Client) Request(params Params) (json.RawMessage, error) {
+func (c *Client) Request(method, endpoint string, params Params) (json.RawMessage, error) {
 	reqBody, err := params.Body()
 	if err != nil {
 		return nil, err
@@ -38,7 +38,7 @@ func (c *Client) Request(params Params) (json.RawMessage, error) {
 	if err != nil {
 		return nil, err
 	}
-	return c.MakeRequest(params.Method(), params.Endpoint(), ContentTypeJson,
+	return c.MakeRequest(method, endpoint, ContentTypeJson,
 		reqBody, queryParams, reqHeaders)
 }
 

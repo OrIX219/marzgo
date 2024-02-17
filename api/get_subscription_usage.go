@@ -9,17 +9,8 @@ import (
 )
 
 type GetSubscriptionUsage struct {
-	Token string
 	Start time.Time
 	End   time.Time
-}
-
-func (GetSubscriptionUsage) Method() string {
-	return "GET"
-}
-
-func (p GetSubscriptionUsage) Endpoint() string {
-	return fmt.Sprintf("sub/%s/usage", p.Token)
 }
 
 func (p GetSubscriptionUsage) Body() (RequestBody, error) {
@@ -38,9 +29,9 @@ func (GetSubscriptionUsage) Headers() (Headers, error) {
 	return nil, nil
 }
 
-func (c *Client) GetSubscriptionUsage(params GetSubscriptionUsage) (models.UserUsagesResponse, error) {
+func (c *Client) GetSubscriptionUsage(token string, params GetSubscriptionUsage) (models.UserUsagesResponse, error) {
 	var usages models.UserUsagesResponse
-	resp, err := c.Request(params)
+	resp, err := c.Request("GET", fmt.Sprintf("sub/%s/usage", token), params)
 	if err != nil {
 		return usages, err
 	}

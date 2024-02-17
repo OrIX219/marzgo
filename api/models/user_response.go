@@ -1,11 +1,11 @@
 package models
 
 type UserResponse struct {
-	Proxies                UserResponseProxies        `json:"proxies"`
+	Proxies                UserProxies                `json:"proxies"`
 	Expire                 uint64                     `json:"expire,omitempty"`
 	DataLimit              uint64                     `json:"data_limit,omitempty"`
 	DataLimitResetStrategy UserDataLimitResetStrategy `json:"data_limit_reset_strategy,omitempty"`
-	Inbounds               UserResponseInbounds       `json:"inbounds,omitempty"`
+	Inbounds               UserInbounds               `json:"inbounds,omitempty"`
 	Note                   string                     `json:"note,omitempty"`
 	SubUpdatedAt           Time                       `json:"sub_updated_at,omitempty"`
 	SubLastUserAgent       string                     `json:"sub_last_user_agent,omitempty"`
@@ -19,5 +19,5 @@ type UserResponse struct {
 	CreatedAt              Time                       `json:"created_at"`
 	Links                  []string                   `json:"links,omitempty"`
 	SubscriptionURL        string                     `json:"subscription_url,omitempty"`
-	ExcludedInbounds       UserResponseInbounds       `json:"excluded_inbounds,omitempty"`
+	ExcludedInbounds       UserInbounds               `json:"excluded_inbounds,omitempty"`
 }
