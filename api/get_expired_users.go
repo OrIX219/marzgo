@@ -3,8 +3,6 @@ package api
 import (
 	"encoding/json"
 	"time"
-
-	"github.com/OrIX219/marzgo/api/models"
 )
 
 type GetExpiredUsers struct {
@@ -28,8 +26,8 @@ func (GetExpiredUsers) Headers() (Headers, error) {
 	return nil, nil
 }
 
-func (c *Client) GetExpiredUsers(params GetExpiredUsers) (models.UsersResponse, error) {
-	var users models.UsersResponse
+func (c *Client) GetExpiredUsers(params GetExpiredUsers) ([]string, error) {
+	users := []string{}
 	resp, err := c.Request("GET", "api/users/expired", params)
 	if err != nil {
 		return users, err

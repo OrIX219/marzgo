@@ -3,8 +3,6 @@ package api
 import (
 	"encoding/json"
 	"time"
-
-	"github.com/OrIX219/marzgo/api/models"
 )
 
 type DeleteExpiredUsers struct {
@@ -28,7 +26,14 @@ func (DeleteExpiredUsers) Headers() (Headers, error) {
 	return nil, nil
 }
 
-func (c *Client) DeleteExpiredUsers(params DeleteExpiredUsers) error {
-	_, err := c.Request("DELETE", "api/users/expired", params)
-	return err
+func (c *Client) DeleteExpiredUsers(params DeleteExpiredUsers) ([]string, error) {
+	users := []string{}
+	resp, err := c.Request("DELETE", "api/users/expired", params)
+	if err != nil {
+		return users, err
+	}
+
+	err = json.Unmarshal(resp, &users)
+
+	return users, err
 }
