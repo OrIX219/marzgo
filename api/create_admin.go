@@ -20,13 +20,9 @@ func (c CreateAdmin) Headers() (Headers, error) {
 	return nil, nil
 }
 
-func (c *Client) CreateAdmin(username, password string) (models.Admin, error) {
+func (c *Client) CreateAdmin(params CreateAdmin) (models.Admin, error) {
 	var admin models.Admin
-	resp, err := c.Request("POST", "api/admin",
-		CreateAdmin{
-			Username: username,
-			Password: password,
-		})
+	resp, err := c.Request("POST", "api/admin", params)
 	if err != nil {
 		return admin, err
 	}
