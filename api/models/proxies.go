@@ -1,12 +1,21 @@
 package models
 
+import "github.com/google/uuid"
+
 type VlessProxy struct {
-	Id   string `json:"id"`
-	Flow string `json:"flow"`
+	Id   uuid.UUID `json:"id"`
+	Flow VlessFlow `json:"flow"`
 }
 
+type VlessFlow string
+
+const (
+	VlessFlowNone             VlessFlow = ""
+	VlessFlowXTLS_RPRX_VISION VlessFlow = "xtls-rprx-vision"
+)
+
 type VmessProxy struct {
-	Id string `json:"id"`
+	Id uuid.UUID `json:"id"`
 }
 
 type TrojanProxy struct {

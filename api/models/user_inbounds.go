@@ -1,8 +1,8 @@
 package models
 
 type UserInbounds struct {
-	Vless       []VlessInbound       `json:"vless"`
-	Vmess       []VmessInbound       `json:"vmess"`
-	Trojan      []TrojanInbound      `json:"trojan"`
-	Shadowsocks []ShadowsocksInbound `json:"shadowsocks"`
+	Vless       []VlessInbound       `json:"vless,omitempty"`
+	Vmess       []VmessInbound       `json:"vmess,omitempty"`
+	Trojan      []TrojanInbound      `json:"trojan,omitempty"`
+	Shadowsocks []ShadowsocksInbound `json:"shadowsocks,omitempty"`
 }

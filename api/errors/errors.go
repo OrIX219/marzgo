@@ -47,5 +47,5 @@ func NewAlreadyExists() AlreadyExistsError {
 }
 
 func (e AlreadyExistsError) Error() string {
-	return fmt.Sprintf("Alredy Exists")
+	return fmt.Sprintf("Already Exists")
 }

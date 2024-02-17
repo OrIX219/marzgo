@@ -1,6 +1,8 @@
 package models
 
-type UserResponse struct {
+import "encoding/json"
+
+type UserCreate struct {
 	Proxies                UserProxies                `json:"proxies"`
 	Expire                 uint64                     `json:"expire,omitempty"`
 	DataLimit              uint64                     `json:"data_limit,omitempty"`
@@ -13,11 +15,14 @@ type UserResponse struct {
 	OnHoldExpireDuration   uint64                     `json:"on_hold_expire_duration,omitempty"`
 	OnHoldTimeout          *Time                      `json:"on_hold_timeout,omitempty"`
 	Username               string                     `json:"username"`
-	Status                 UserStatus                 `json:"status"`
-	UsedTraffic            uint64                     `json:"used_traffic"`
-	LifetimeUsedTraffic    uint64                     `json:"lifetime_used_traffic,omitempty"`
-	CreatedAt              *Time                      `json:"created_at"`
-	Links                  []string                   `json:"links,omitempty"`
-	SubscriptionURL        string                     `json:"subscription_url,omitempty"`
-	ExcludedInbounds       UserInbounds               `json:"excluded_inbounds,omitempty"`
+	Status                 UserCreateStatus           `json:"status,omitempty"`
+}
+
+func (p UserCreate) JSONEncoded() []byte {
+	buf, _ := json.Marshal(p)
+	return buf
+}
+
+func (p UserCreate) URLEncoded() string {
+	return ""
 }

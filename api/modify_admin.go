@@ -22,7 +22,7 @@ func (ModifyAdmin) Headers() (Headers, error) {
 }
 
 func (c *Client) ModifyAdmin(username string, params ModifyAdmin) (models.Admin, error) {
-	admin := models.Admin{}
+	var admin models.Admin
 	resp, err := c.Request("PUT", fmt.Sprintf("api/admin/%s", username), params)
 	if err != nil {
 		return admin, err
