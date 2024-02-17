@@ -20,8 +20,8 @@ func (CreateAdmin) Endpoint() string {
 	return "api/admin"
 }
 
-func (c CreateAdmin) Body() (BodyParams, error) {
-	params := make(BodyParams)
+func (c CreateAdmin) Body() (RequestBody, error) {
+	params := make(RequestBody)
 	params.AddStringNonEmpty("username", c.Username)
 	params.AddStringNonEmpty("password", c.Password)
 	params.AddBool("is_sudo", c.IsSudo)
@@ -29,7 +29,7 @@ func (c CreateAdmin) Body() (BodyParams, error) {
 	return params, nil
 }
 
-func (CreateAdmin) Url() (UrlParams, error) {
+func (CreateAdmin) Query() (QueryParams, error) {
 	return nil, nil
 }
 

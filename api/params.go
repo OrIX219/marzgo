@@ -11,26 +11,26 @@ import (
 type Params interface {
 	Method() string
 	Endpoint() string
-	Body() (BodyParams, error)
-	Url() (UrlParams, error)
+	Body() (RequestBody, error)
+	Query() (QueryParams, error)
 	Headers() (Headers, error)
 }
 
 type Headers map[string]string
 
-type BodyParams map[string]string
+type RequestBody map[string]string
 
-func (p BodyParams) AddString(key, value string) {
+func (p RequestBody) AddString(key, value string) {
 	p[key] = value
 }
 
-func (p BodyParams) AddStringNonEmpty(key, value string) {
+func (p RequestBody) AddStringNonEmpty(key, value string) {
 	if value != "" {
 		p[key] = value
 	}
 }
 
-func (p BodyParams) AddStringSliceNonEmpty(key string, value []string) {
+func (p RequestBody) AddStringSliceNonEmpty(key string, value []string) {
 	if len(value) != 0 {
 		// Ingoring error
 		// What can go wrong here? Clueless
@@ -39,17 +39,17 @@ func (p BodyParams) AddStringSliceNonEmpty(key string, value []string) {
 	}
 }
 
-func (p BodyParams) AddInt(key string, value int) {
+func (p RequestBody) AddInt(key string, value int) {
 	p[key] = strconv.Itoa(value)
 }
 
-func (p BodyParams) AddIntNonZero(key string, value int) {
+func (p RequestBody) AddIntNonZero(key string, value int) {
 	if value != 0 {
 		p[key] = strconv.Itoa(value)
 	}
 }
 
-func (p BodyParams) AddIntSliceNonEmpty(key string, value []int) {
+func (p RequestBody) AddIntSliceNonEmpty(key string, value []int) {
 	if len(value) != 0 {
 		// Ingoring error
 		// What can go wrong here? Clueless
@@ -58,17 +58,17 @@ func (p BodyParams) AddIntSliceNonEmpty(key string, value []int) {
 	}
 }
 
-func (p BodyParams) AddInt64(key string, value int64) {
+func (p RequestBody) AddInt64(key string, value int64) {
 	p[key] = strconv.FormatInt(value, 10)
 }
 
-func (p BodyParams) AddInt64NonZero(key string, value int64) {
+func (p RequestBody) AddInt64NonZero(key string, value int64) {
 	if value != 0 {
 		p[key] = strconv.FormatInt(value, 10)
 	}
 }
 
-func (p BodyParams) AddInt64SliceNonEmpty(key string, value []int64) {
+func (p RequestBody) AddInt64SliceNonEmpty(key string, value []int64) {
 	if len(value) != 0 {
 		// Ingoring error
 		// What can go wrong here? Clueless
@@ -77,17 +77,17 @@ func (p BodyParams) AddInt64SliceNonEmpty(key string, value []int64) {
 	}
 }
 
-func (p BodyParams) AddFloat(key string, value float64) {
+func (p RequestBody) AddFloat(key string, value float64) {
 	p[key] = strconv.FormatFloat(value, 'f', 6, 64)
 }
 
-func (p BodyParams) AddFloatNonZero(key string, value float64) {
+func (p RequestBody) AddFloatNonZero(key string, value float64) {
 	if value != 0 {
 		p[key] = strconv.FormatFloat(value, 'f', 6, 64)
 	}
 }
 
-func (p BodyParams) AddFloatSliceNonEmpty(key string, value []float64) {
+func (p RequestBody) AddFloatSliceNonEmpty(key string, value []float64) {
 	if len(value) != 0 {
 		// Ingoring error
 		// What can go wrong here? Clueless
@@ -96,11 +96,11 @@ func (p BodyParams) AddFloatSliceNonEmpty(key string, value []float64) {
 	}
 }
 
-func (p BodyParams) AddBool(key string, value bool) {
+func (p RequestBody) AddBool(key string, value bool) {
 	p[key] = strconv.FormatBool(value)
 }
 
-func (p BodyParams) AddBoolSliceNonEmpty(key string, value []bool) {
+func (p RequestBody) AddBoolSliceNonEmpty(key string, value []bool) {
 	if len(value) != 0 {
 		// Ingoring error
 		// What can go wrong here? Clueless
@@ -109,14 +109,14 @@ func (p BodyParams) AddBoolSliceNonEmpty(key string, value []bool) {
 	}
 }
 
-func (p BodyParams) AddTimeNonZero(key string, value time.Time) {
+func (p RequestBody) AddTimeNonZero(key string, value time.Time) {
 	zero := time.Time{}
 	if value != zero {
 		p[key] = value.String()
 	}
 }
 
-func (p BodyParams) AddTimeSliceNonEmpty(key string, value []time.Time) {
+func (p RequestBody) AddTimeSliceNonEmpty(key string, value []time.Time) {
 	if len(value) != 0 {
 		// Ingoring error
 		// What can go wrong here? Clueless
@@ -125,7 +125,7 @@ func (p BodyParams) AddTimeSliceNonEmpty(key string, value []time.Time) {
 	}
 }
 
-func (p BodyParams) AddAny(key string, value any) error {
+func (p RequestBody) AddAny(key string, value any) error {
 	if value == nil {
 		return nil
 	}
@@ -145,12 +145,12 @@ func (p BodyParams) AddAny(key string, value any) error {
 	return nil
 }
 
-func (p BodyParams) JSONEncoded() []byte {
+func (p RequestBody) JSONEncoded() []byte {
 	buf, _ := json.Marshal(p)
 	return buf
 }
 
-func (p BodyParams) URLEncoded() string {
+func (p RequestBody) URLEncoded() string {
 	values := url.Values{}
 	for k, v := range p {
 		values.Set(k, v)
@@ -158,39 +158,39 @@ func (p BodyParams) URLEncoded() string {
 	return values.Encode()
 }
 
-type UrlParams map[string][]string
+type QueryParams map[string][]string
 
-func (p UrlParams) Add(key, value string) {
+func (p QueryParams) Add(key, value string) {
 	p[key] = append(p[key], value)
 }
 
-func (p UrlParams) AddString(key, value string) {
+func (p QueryParams) AddString(key, value string) {
 	p.Add(key, value)
 }
 
-func (p UrlParams) AddStringNonEmpty(key, value string) {
+func (p QueryParams) AddStringNonEmpty(key, value string) {
 	if value != "" {
 		p.Add(key, value)
 	}
 }
 
-func (p UrlParams) AddStringSliceNonEmpty(key string, value []string) {
+func (p QueryParams) AddStringSliceNonEmpty(key string, value []string) {
 	if len(value) != 0 {
 		p[key] = append(p[key], value...)
 	}
 }
 
-func (p UrlParams) AddInt(key string, value int) {
+func (p QueryParams) AddInt(key string, value int) {
 	p.Add(key, strconv.Itoa(value))
 }
 
-func (p UrlParams) AddIntNonZero(key string, value int) {
+func (p QueryParams) AddIntNonZero(key string, value int) {
 	if value != 0 {
 		p.Add(key, strconv.Itoa(value))
 	}
 }
 
-func (p UrlParams) AddIntSliceNonEmpty(key string, value []int) {
+func (p QueryParams) AddIntSliceNonEmpty(key string, value []int) {
 	if len(value) != 0 {
 		for _, v := range value {
 			p.Add(key, strconv.Itoa(v))
@@ -198,17 +198,17 @@ func (p UrlParams) AddIntSliceNonEmpty(key string, value []int) {
 	}
 }
 
-func (p UrlParams) AddInt64(key string, value int64) {
+func (p QueryParams) AddInt64(key string, value int64) {
 	p.Add(key, strconv.FormatInt(value, 10))
 }
 
-func (p UrlParams) AddInt64NonZero(key string, value int64) {
+func (p QueryParams) AddInt64NonZero(key string, value int64) {
 	if value != 0 {
 		p.Add(key, strconv.FormatInt(value, 10))
 	}
 }
 
-func (p UrlParams) AddInt64SliceNonEmpty(key string, value []int64) {
+func (p QueryParams) AddInt64SliceNonEmpty(key string, value []int64) {
 	if len(value) != 0 {
 		for _, v := range value {
 			p.Add(key, strconv.FormatInt(v, 10))
@@ -216,17 +216,17 @@ func (p UrlParams) AddInt64SliceNonEmpty(key string, value []int64) {
 	}
 }
 
-func (p UrlParams) AddFloat(key string, value float64) {
+func (p QueryParams) AddFloat(key string, value float64) {
 	p.Add(key, strconv.FormatFloat(value, 'f', 6, 64))
 }
 
-func (p UrlParams) AddFloatNonZero(key string, value float64) {
+func (p QueryParams) AddFloatNonZero(key string, value float64) {
 	if value != 0 {
 		p.Add(key, strconv.FormatFloat(value, 'f', 6, 64))
 	}
 }
 
-func (p UrlParams) AddFloatSliceNonEmpty(key string, value []float64) {
+func (p QueryParams) AddFloatSliceNonEmpty(key string, value []float64) {
 	if len(value) != 0 {
 		for _, v := range value {
 			p.Add(key, strconv.FormatFloat(v, 'f', 6, 64))
@@ -234,11 +234,11 @@ func (p UrlParams) AddFloatSliceNonEmpty(key string, value []float64) {
 	}
 }
 
-func (p UrlParams) AddBool(key string, value bool) {
+func (p QueryParams) AddBool(key string, value bool) {
 	p.Add(key, strconv.FormatBool(value))
 }
 
-func (p UrlParams) AddBoolSliceNonEmpty(key string, value []bool) {
+func (p QueryParams) AddBoolSliceNonEmpty(key string, value []bool) {
 	if len(value) != 0 {
 		for _, v := range value {
 			p.Add(key, strconv.FormatBool(v))
@@ -246,14 +246,14 @@ func (p UrlParams) AddBoolSliceNonEmpty(key string, value []bool) {
 	}
 }
 
-func (p UrlParams) AddTimeNonZero(key string, value time.Time) {
+func (p QueryParams) AddTimeNonZero(key string, value time.Time) {
 	zero := time.Time{}
 	if value != zero {
 		p.Add(key, value.String())
 	}
 }
 
-func (p UrlParams) AddTimeSliceNonEmpty(key string, value []time.Time) {
+func (p QueryParams) AddTimeSliceNonEmpty(key string, value []time.Time) {
 	if len(value) != 0 {
 		for i := range value {
 			p.Add(key, value[i].String())
@@ -261,6 +261,6 @@ func (p UrlParams) AddTimeSliceNonEmpty(key string, value []time.Time) {
 	}
 }
 
-func (p UrlParams) Encode() string {
+func (p QueryParams) Encode() string {
 	return url.Values(p).Encode()
 }

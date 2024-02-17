@@ -22,12 +22,12 @@ func (p GetSubscriptionUsage) Endpoint() string {
 	return fmt.Sprintf("sub/%s/usage", p.Token)
 }
 
-func (p GetSubscriptionUsage) Body() (BodyParams, error) {
+func (p GetSubscriptionUsage) Body() (RequestBody, error) {
 	return nil, nil
 }
 
-func (p GetSubscriptionUsage) Url() (UrlParams, error) {
-	params := make(UrlParams)
+func (p GetSubscriptionUsage) Query() (QueryParams, error) {
+	params := make(QueryParams)
 	params.AddTimeNonZero("start", p.Start)
 	params.AddTimeNonZero("end", p.End)
 

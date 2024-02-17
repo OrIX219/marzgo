@@ -19,11 +19,11 @@ func (p UserSubscriptionInfo) Endpoint() string {
 	return fmt.Sprintf("sub/%s/info", p.Token)
 }
 
-func (UserSubscriptionInfo) Body() (BodyParams, error) {
+func (UserSubscriptionInfo) Body() (RequestBody, error) {
 	return nil, nil
 }
 
-func (UserSubscriptionInfo) Url() (UrlParams, error) {
+func (UserSubscriptionInfo) Query() (QueryParams, error) {
 	return nil, nil
 }
 

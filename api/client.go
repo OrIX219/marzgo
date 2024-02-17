@@ -26,11 +26,11 @@ type Client struct {
 }
 
 func (c *Client) Request(params Params) (json.RawMessage, error) {
-	bodyParams, err := params.Body()
+	reqBody, err := params.Body()
 	if err != nil {
 		return nil, err
 	}
-	urlParams, err := params.Url()
+	queryParams, err := params.Query()
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ func (c *Client) Request(params Params) (json.RawMessage, error) {
 		return nil, err
 	}
 	return c.MakeRequest(params.Method(), params.Endpoint(), ContentTypeJson,
-		bodyParams, urlParams, reqHeaders)
+		reqBody, queryParams, reqHeaders)
 }
 
 func (c *Client) addAuthHeader(req *http.Request) {
@@ -50,16 +50,16 @@ func (c *Client) addAuthHeader(req *http.Request) {
 }
 
 func (c *Client) MakeRequest(method, endpoint string, contentType ContentType,
-	bodyParams BodyParams, urlParams UrlParams, headers Headers) (json.RawMessage, error) {
+	reqBody RequestBody, queryParams QueryParams, headers Headers) (json.RawMessage, error) {
 	url := fmt.Sprint(c.APIBaseUrl, endpoint)
 
 	var body io.Reader
-	if bodyParams != nil {
+	if reqBody != nil {
 		switch contentType {
 		case ContentTypeJson:
-			body = bytes.NewReader(bodyParams.JSONEncoded())
+			body = bytes.NewReader(reqBody.JSONEncoded())
 		case ContentTypeUrlEncoded:
-			body = strings.NewReader(bodyParams.URLEncoded())
+			body = strings.NewReader(reqBody.URLEncoded())
 		}
 	}
 
@@ -73,8 +73,8 @@ func (c *Client) MakeRequest(method, endpoint string, contentType ContentType,
 	for k, v := range headers {
 		req.Header.Set(k, v)
 	}
-	if urlParams != nil {
-		req.URL.RawQuery = urlParams.Encode()
+	if queryParams != nil {
+		req.URL.RawQuery = queryParams.Encode()
 	}
 
 	resp, err := c.HTTPClient.Do(req)
