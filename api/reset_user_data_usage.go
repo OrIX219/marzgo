@@ -21,6 +21,7 @@ func (c ResetUserDataUsage) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// ResetUserDataUsage resets data usage of a user with a specified username and returns that user.
 func (c *Client) ResetUserDataUsage(username string) (models.UserResponse, error) {
 	var user models.UserResponse
 	resp, err := c.Request("POST", fmt.Sprintf("api/user/%s/reset", username), ResetUserDataUsage{})

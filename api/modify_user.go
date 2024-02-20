@@ -21,6 +21,7 @@ func (c ModifyUser) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// ModifyUser modifies a user with a specified username and returns a resulting user.
 func (c *Client) ModifyUser(username string, params ModifyUser) (models.UserResponse, error) {
 	var user models.UserResponse
 	resp, err := c.Request("PUT", fmt.Sprintf("api/user/%s", username), params)

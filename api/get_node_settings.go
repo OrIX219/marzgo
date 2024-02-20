@@ -20,6 +20,7 @@ func (GetNodeSettings) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetNodeSettings returns node settings.
 func (c *Client) GetNodeSettings() (models.NodeSettings, error) {
 	var settings models.NodeSettings
 	resp, err := c.Request("GET", "api/node/settings", GetNodeSettings{})

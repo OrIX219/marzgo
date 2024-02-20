@@ -21,6 +21,7 @@ func (ModifyAdmin) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// ModifyAdmin modifies an admin with a specified username and returns a resulting admin.
 func (c *Client) ModifyAdmin(username string, params ModifyAdmin) (models.Admin, error) {
 	var admin models.Admin
 	resp, err := c.Request("PUT", fmt.Sprintf("api/admin/%s", username), params)

@@ -20,6 +20,8 @@ func (c AddUserTemplate) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// AddUserTemplate adds a new user template with specified params and
+// returns resulting template.
 func (c *Client) AddUserTemplate(params AddUserTemplate) (models.UserTemplateResponse, error) {
 	var user models.UserTemplateResponse
 	resp, err := c.Request("POST", "api/user_template", params)

@@ -20,6 +20,7 @@ func (GetInbounds) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetInbounds returns all inbounds divided in protocols.
 func (c *Client) GetInbounds() (models.ProxyInbounds, error) {
 	var inbounds models.ProxyInbounds
 	resp, err := c.Request("GET", "api/inbounds", GetInbounds{})

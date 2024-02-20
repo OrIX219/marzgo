@@ -26,6 +26,9 @@ func (GetExpiredUsers) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetExpiredUsers returns usernames of all users
+// whose subscriptions had expired in specified period of time
+// (default all time).
 func (c *Client) GetExpiredUsers(params GetExpiredUsers) ([]string, error) {
 	users := []string{}
 	resp, err := c.Request("GET", "api/users/expired", params)

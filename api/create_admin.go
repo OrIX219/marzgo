@@ -20,6 +20,10 @@ func (c CreateAdmin) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// CreateAdmin creates a new admin with specified params and
+// returns resulting admin.
+//
+// Required params are Username, Password and IsSudo (default false).
 func (c *Client) CreateAdmin(params CreateAdmin) (models.Admin, error) {
 	var admin models.Admin
 	resp, err := c.Request("POST", "api/admin", params)

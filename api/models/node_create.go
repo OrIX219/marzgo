@@ -3,8 +3,8 @@ package models
 import "encoding/json"
 
 type NodeCreate struct {
-	Name             string   `json:"name"`
-	Address          string   `json:"address"`
+	Name             string   `json:"name,omitempty"`
+	Address          string   `json:"address,omitempty"`
 	Port             *int     `json:"port,omitempty"`
 	APIPort          *int     `json:"api_port,omitempty"`
 	UsageCoefficient *float64 `json:"usage_coefficient,omitempty"`

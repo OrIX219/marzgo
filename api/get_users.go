@@ -33,6 +33,8 @@ func (GetUsers) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetUsers returns all users offseted, limited and sorted by params.
+// If Username and/or Status are provided only matching users are returned.
 func (c *Client) GetUsers(params GetUsers) (models.UsersResponse, error) {
 	var users models.UsersResponse
 	resp, err := c.Request("GET", "api/users", params)

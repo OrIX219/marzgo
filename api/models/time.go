@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Time represents time.Time which is parsed in format of RFC3339Nano without timezone
 type Time time.Time
 
 func (t *Time) UnmarshalJSON(b []byte) error {

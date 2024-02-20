@@ -28,6 +28,7 @@ func (GetNodesUsage) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetNodesUsage returns usages of nodes for a specified period of time (default all time).
 func (c *Client) GetNodesUsage(params GetNodesUsage) (models.NodesUsageResponse, error) {
 	var usages models.NodesUsageResponse
 	resp, err := c.Request("GET", "api/nodes/usage", params)

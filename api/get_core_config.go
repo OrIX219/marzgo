@@ -18,6 +18,7 @@ func (GetCoreConfig) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetCoreConfig returns a core config in raw json.
 func (c *Client) GetCoreConfig() (json.RawMessage, error) {
 	return c.Request("GET", "api/core/config", GetCoreConfig{})
 }

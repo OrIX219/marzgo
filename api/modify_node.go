@@ -21,6 +21,7 @@ func (c ModifyNode) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// ModifyNode modifies a node with a specified id and returns a resulting node.
 func (c *Client) ModifyNode(id int, params ModifyNode) (models.NodeResponse, error) {
 	var node models.NodeResponse
 	resp, err := c.Request("PUT", fmt.Sprintf("api/node/%d", id), params)

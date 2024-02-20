@@ -20,6 +20,7 @@ func (ModifyCoreConfig) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// ModifyCoreConfig sets core config to provided one and returns it back.
 func (c *Client) ModifyCoreConfig(config ModifyCoreConfig) (json.RawMessage, error) {
 	return c.Request("PUT", "api/core/config", config)
 }

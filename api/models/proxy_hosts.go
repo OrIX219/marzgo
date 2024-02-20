@@ -1,5 +1,7 @@
 package models
 
+// ProxyHosts represents hosts devided in inbounds.
+// Can be cast to models.ModifyHosts if needed.
 type ProxyHosts map[string][]ProxyHost
 
 type ProxyHost struct {

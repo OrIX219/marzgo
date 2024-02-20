@@ -20,6 +20,7 @@ func (GetSystemStats) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetSystemStats returns system stats.
 func (c *Client) GetSystemStats() (models.SystemStats, error) {
 	var stats models.SystemStats
 	resp, err := c.Request("GET", "api/system", GetSystemStats{})

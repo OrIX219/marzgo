@@ -21,6 +21,8 @@ func (c RevokeUserSubscription) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// RevokeUserSubscription revokes subscription of a user with a specified username
+// and returns a resulting user with a new subscription.
 func (c *Client) RevokeUserSubscription(username string) (models.UserResponse, error) {
 	var user models.UserResponse
 	resp, err := c.Request("POST", fmt.Sprintf("api/user/%s/revoke_sub", username), RevokeUserSubscription{})

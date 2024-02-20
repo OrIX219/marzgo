@@ -21,6 +21,7 @@ func (GetUser) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetUser returns a user with a specified username.
 func (c *Client) GetUser(username string) (models.UserResponse, error) {
 	var user models.UserResponse
 	resp, err := c.Request("GET", fmt.Sprintf("api/user/%s", username), GetUser{})

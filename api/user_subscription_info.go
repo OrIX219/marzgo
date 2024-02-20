@@ -21,6 +21,7 @@ func (UserSubscriptionInfo) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// UserSubscriptionInfo returns a user corresponding to a specified sub token.
 func (c *Client) UserSubscriptionInfo(token string) (models.UserResponse, error) {
 	var sub models.UserResponse
 	resp, err := c.Request("GET", fmt.Sprintf("sub/%s/info", token), UserSubscriptionInfo{})

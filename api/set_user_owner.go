@@ -26,6 +26,7 @@ func (SetUserOwner) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// SetUserOwner changes owner of a user with a specified username.
 func (c *Client) SetUserOwner(username string, params SetUserOwner) (models.UserResponse, error) {
 	var user models.UserResponse
 	resp, err := c.Request("PUT", fmt.Sprintf("api/user/%s/set-owner", username), params)

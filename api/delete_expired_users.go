@@ -26,6 +26,8 @@ func (DeleteExpiredUsers) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// DeleteExpiredUsers deletes all users with expired subscription
+// and returns their usernames.
 func (c *Client) DeleteExpiredUsers(params DeleteExpiredUsers) ([]string, error) {
 	users := []string{}
 	resp, err := c.Request("DELETE", "api/users/expired", params)

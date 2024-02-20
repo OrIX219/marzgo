@@ -14,7 +14,7 @@ type UserCreate struct {
 	OnlineAt               *Time                      `json:"online_at,omitempty"`
 	OnHoldExpireDuration   uint64                     `json:"on_hold_expire_duration,omitempty"`
 	OnHoldTimeout          *Time                      `json:"on_hold_timeout,omitempty"`
-	Username               string                     `json:"username"`
+	Username               string                     `json:"username,omitempty"`
 	Status                 UserCreateStatus           `json:"status,omitempty"`
 }
 

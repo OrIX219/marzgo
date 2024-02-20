@@ -11,10 +11,12 @@ import (
 	"github.com/OrIX219/marzgo/api/errors"
 )
 
+// HTTPClient performs http requests
 type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// Client represents http client coupled with admin credentials and token
 type Client struct {
 	APIBaseUrl string
 
@@ -25,6 +27,10 @@ type Client struct {
 	HTTPClient HTTPClient
 }
 
+// A wrapper for MakeRequest.
+// Request makes a request with given params to specified endpoint using specified method.
+//
+// Returns response in raw json.
 func (c *Client) Request(method, endpoint string, params Params) (json.RawMessage, error) {
 	reqBody, err := params.Body()
 	if err != nil {
@@ -49,6 +55,11 @@ func (c *Client) addAuthHeader(req *http.Request) {
 	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.Token))
 }
 
+// MakeRequest makes a request to specified endpoint using specified http method
+// Request is populated with given reqBody, queryParams and headers
+// reqBody is expected to return valid contents of contentType
+//
+// Returns response in raw json
 func (c *Client) MakeRequest(method, endpoint string, contentType ContentType,
 	reqBody RequestBody, queryParams QueryParams, headers Headers) (json.RawMessage, error) {
 	url := fmt.Sprint(c.APIBaseUrl, endpoint)

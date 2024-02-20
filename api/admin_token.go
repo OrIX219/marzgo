@@ -6,6 +6,7 @@ import (
 	"github.com/OrIX219/marzgo/api/models"
 )
 
+// AdminToken requests an admin token with credentials stored in current Client instance.
 func (c *Client) AdminToken() (models.Token, error) {
 	var token models.Token
 	resp, err := c.MakeRequest("POST", "api/admin/token", ContentTypeUrlEncoded,

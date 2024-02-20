@@ -21,6 +21,7 @@ func (GetUserTemplate) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetUserTemplate returns a user template with a specified id.
 func (c *Client) GetUserTemplate(id int) (models.UserTemplateResponse, error) {
 	var template models.UserTemplateResponse
 	resp, err := c.Request("GET", fmt.Sprintf("api/user_template/%d", id), GetUserTemplate{})

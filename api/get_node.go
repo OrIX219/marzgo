@@ -21,6 +21,7 @@ func (GetNode) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetNode returns a node with specified id.
 func (c *Client) GetNode(id int) (models.NodeResponse, error) {
 	var node models.NodeResponse
 	resp, err := c.Request("GET", fmt.Sprintf("api/node/%d", id), GetNode{})

@@ -21,6 +21,7 @@ func (c ModifyUserTemplate) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// ModifyUserTemplate modifies a user template with a specified id and returns a resulting template.
 func (c *Client) ModifyUserTemplate(id int, params ModifyUserTemplate) (models.UserTemplateResponse, error) {
 	var user models.UserTemplateResponse
 	resp, err := c.Request("PUT", fmt.Sprintf("api/user_template/%d", id), params)

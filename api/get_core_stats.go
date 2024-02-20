@@ -20,6 +20,7 @@ func (GetCoreStats) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetCoreStats returns core stats.
 func (c *Client) GetCoreStats() (models.CoreStats, error) {
 	var stats models.CoreStats
 	resp, err := c.Request("GET", "api/core", GetCoreStats{})

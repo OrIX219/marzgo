@@ -1,5 +1,6 @@
 package api
 
+// ContentType enum represents a value for http Content-Type header
 type ContentType int
 
 const (

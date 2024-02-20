@@ -27,6 +27,7 @@ func (GetUserTemplates) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetUserTemplates returns all user templates.
 func (c *Client) GetUserTemplates(params GetUserTemplates) ([]models.UserTemplateResponse, error) {
 	templates := []models.UserTemplateResponse{}
 	resp, err := c.Request("GET", "api/user_template", params)

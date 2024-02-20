@@ -20,6 +20,10 @@ func (c AddNode) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// AddNode adds a new Marzban node with specified params and
+// returns resulting node.
+//
+// Required params are Name and Address.
 func (c *Client) AddNode(params AddNode) (models.NodeResponse, error) {
 	var node models.NodeResponse
 	resp, err := c.Request("POST", "api/node", params)

@@ -20,6 +20,7 @@ func (GetNodes) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetNodes returns all nodes.
 func (c *Client) GetNodes() ([]models.NodeResponse, error) {
 	nodes := []models.NodeResponse{}
 	resp, err := c.Request("GET", "api/nodes", GetNodes{})

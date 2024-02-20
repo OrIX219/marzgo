@@ -29,6 +29,8 @@ func (GetAdmins) Headers() (Headers, error) {
 	return nil, nil
 }
 
+// GetAdmins returns all admins offseted and limited by params.
+// If Username is specified returns only matching admin if exists.
 func (c *Client) GetAdmins(params GetAdmins) ([]models.Admin, error) {
 	admins := []models.Admin{}
 	resp, err := c.Request("GET", "api/admins", params)
