@@ -1,10 +1,8 @@
 package models
 
-import "github.com/google/uuid"
-
 type VlessProxy struct {
-	Id   uuid.UUID `json:"id"`
-	Flow VlessFlow `json:"flow"`
+	Id   string    `json:"id,omitempty"`
+	Flow VlessFlow `json:"flow,omitempty"`
 }
 
 type VlessFlow string
@@ -15,15 +13,15 @@ const (
 )
 
 type VmessProxy struct {
-	Id uuid.UUID `json:"id"`
+	Id string `json:"id,omitempty"`
 }
 
 type TrojanProxy struct {
-	Password string `json:"password"`
-	Flow     string `json:"flow"`
+	Password string `json:"password,omitempty"`
+	Flow     string `json:"flow,omitempty"`
 }
 
 type ShadowsocksProxy struct {
-	Password string `json:"password"`
-	Method   string `json:"method"`
+	Password string `json:"password,omitempty"`
+	Method   string `json:"method,omitempty"`
 }
