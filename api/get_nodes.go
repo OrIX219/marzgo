@@ -8,16 +8,16 @@ import (
 
 type GetNodes struct{}
 
-func (GetNodes) Body() (RequestBody, error) {
-	return nil, nil
+func (GetNodes) Body() RequestBody {
+	return nil
 }
 
-func (GetNodes) Query() (QueryParams, error) {
-	return nil, nil
+func (GetNodes) Query() QueryParams {
+	return nil
 }
 
-func (GetNodes) Headers() (Headers, error) {
-	return nil, nil
+func (GetNodes) Headers() Headers {
+	return nil
 }
 
 // GetNodes returns all nodes.

@@ -6,16 +6,16 @@ import (
 
 type GetCoreConfig struct{}
 
-func (GetCoreConfig) Body() (RequestBody, error) {
-	return nil, nil
+func (GetCoreConfig) Body() RequestBody {
+	return nil
 }
 
-func (GetCoreConfig) Query() (QueryParams, error) {
-	return nil, nil
+func (GetCoreConfig) Query() QueryParams {
+	return nil
 }
 
-func (GetCoreConfig) Headers() (Headers, error) {
-	return nil, nil
+func (GetCoreConfig) Headers() Headers {
+	return nil
 }
 
 // GetCoreConfig returns a core config in raw json.

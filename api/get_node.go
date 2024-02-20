@@ -9,16 +9,16 @@ import (
 
 type GetNode struct{}
 
-func (GetNode) Body() (RequestBody, error) {
-	return nil, nil
+func (GetNode) Body() RequestBody {
+	return nil
 }
 
-func (GetNode) Query() (QueryParams, error) {
-	return nil, nil
+func (GetNode) Query() QueryParams {
+	return nil
 }
 
-func (GetNode) Headers() (Headers, error) {
-	return nil, nil
+func (GetNode) Headers() Headers {
+	return nil
 }
 
 // GetNode returns a node with specified id.

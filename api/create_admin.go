@@ -8,16 +8,16 @@ import (
 
 type CreateAdmin models.AdminCreate
 
-func (c CreateAdmin) Body() (RequestBody, error) {
-	return models.AdminCreate(c), nil
+func (c CreateAdmin) Body() RequestBody {
+	return models.AdminCreate(c)
 }
 
-func (CreateAdmin) Query() (QueryParams, error) {
-	return nil, nil
+func (CreateAdmin) Query() QueryParams {
+	return nil
 }
 
-func (c CreateAdmin) Headers() (Headers, error) {
-	return nil, nil
+func (c CreateAdmin) Headers() Headers {
+	return nil
 }
 
 // CreateAdmin creates a new admin with specified params and

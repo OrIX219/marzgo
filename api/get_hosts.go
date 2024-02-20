@@ -8,16 +8,16 @@ import (
 
 type GetHosts struct{}
 
-func (GetHosts) Body() (RequestBody, error) {
-	return nil, nil
+func (GetHosts) Body() RequestBody {
+	return nil
 }
 
-func (GetHosts) Query() (QueryParams, error) {
-	return nil, nil
+func (GetHosts) Query() QueryParams {
+	return nil
 }
 
-func (GetHosts) Headers() (Headers, error) {
-	return nil, nil
+func (GetHosts) Headers() Headers {
+	return nil
 }
 
 // GetHosts returns all hosts divided in inbounds.

@@ -9,16 +9,16 @@ import (
 
 type ModifyUser models.UserModify
 
-func (c ModifyUser) Body() (RequestBody, error) {
-	return models.UserModify(c), nil
+func (c ModifyUser) Body() RequestBody {
+	return models.UserModify(c)
 }
 
-func (ModifyUser) Query() (QueryParams, error) {
-	return nil, nil
+func (ModifyUser) Query() QueryParams {
+	return nil
 }
 
-func (c ModifyUser) Headers() (Headers, error) {
-	return nil, nil
+func (c ModifyUser) Headers() Headers {
+	return nil
 }
 
 // ModifyUser modifies a user with a specified username and returns a resulting user.

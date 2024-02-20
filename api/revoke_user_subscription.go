@@ -9,16 +9,16 @@ import (
 
 type RevokeUserSubscription struct{}
 
-func (c RevokeUserSubscription) Body() (RequestBody, error) {
-	return nil, nil
+func (c RevokeUserSubscription) Body() RequestBody {
+	return nil
 }
 
-func (RevokeUserSubscription) Query() (QueryParams, error) {
-	return nil, nil
+func (RevokeUserSubscription) Query() QueryParams {
+	return nil
 }
 
-func (c RevokeUserSubscription) Headers() (Headers, error) {
-	return nil, nil
+func (c RevokeUserSubscription) Headers() Headers {
+	return nil
 }
 
 // RevokeUserSubscription revokes subscription of a user with a specified username

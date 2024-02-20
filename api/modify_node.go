@@ -9,16 +9,16 @@ import (
 
 type ModifyNode models.NodeModify
 
-func (c ModifyNode) Body() (RequestBody, error) {
-	return models.NodeModify(c), nil
+func (c ModifyNode) Body() RequestBody {
+	return models.NodeModify(c)
 }
 
-func (ModifyNode) Query() (QueryParams, error) {
-	return nil, nil
+func (ModifyNode) Query() QueryParams {
+	return nil
 }
 
-func (c ModifyNode) Headers() (Headers, error) {
-	return nil, nil
+func (c ModifyNode) Headers() Headers {
+	return nil
 }
 
 // ModifyNode modifies a node with a specified id and returns a resulting node.

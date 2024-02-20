@@ -14,11 +14,11 @@ type GetUsers struct {
 	Sort     string
 }
 
-func (GetUsers) Body() (RequestBody, error) {
-	return nil, nil
+func (GetUsers) Body() RequestBody {
+	return nil
 }
 
-func (p GetUsers) Query() (QueryParams, error) {
+func (p GetUsers) Query() QueryParams {
 	params := make(QueryParams)
 	params.AddIntNonZero("offset", p.Offset)
 	params.AddIntNonZero("limit", p.Limit)
@@ -26,11 +26,11 @@ func (p GetUsers) Query() (QueryParams, error) {
 	params.AddStringNonEmpty("status", string(p.Status))
 	params.AddStringNonEmpty("sort", p.Sort)
 
-	return params, nil
+	return params
 }
 
-func (GetUsers) Headers() (Headers, error) {
-	return nil, nil
+func (GetUsers) Headers() Headers {
+	return nil
 }
 
 // GetUsers returns all users offseted, limited and sorted by params.

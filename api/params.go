@@ -8,9 +8,9 @@ import (
 
 // Params provides access to request's body, URL query parameters and headers
 type Params interface {
-	Body() (RequestBody, error)
-	Query() (QueryParams, error)
-	Headers() (Headers, error)
+	Body() RequestBody
+	Query() QueryParams
+	Headers() Headers
 }
 
 // Headers represents a set of request headers

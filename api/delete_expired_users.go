@@ -10,20 +10,20 @@ type DeleteExpiredUsers struct {
 	ExpiredAfter  time.Time
 }
 
-func (DeleteExpiredUsers) Body() (RequestBody, error) {
-	return nil, nil
+func (DeleteExpiredUsers) Body() RequestBody {
+	return nil
 }
 
-func (p DeleteExpiredUsers) Query() (QueryParams, error) {
+func (p DeleteExpiredUsers) Query() QueryParams {
 	params := make(QueryParams)
 	params.AddTimeNonZero("expired_before", p.ExpiredBefore)
 	params.AddTimeNonZero("expired_after", p.ExpiredAfter)
 
-	return params, nil
+	return params
 }
 
-func (DeleteExpiredUsers) Headers() (Headers, error) {
-	return nil, nil
+func (DeleteExpiredUsers) Headers() Headers {
+	return nil
 }
 
 // DeleteExpiredUsers deletes all users with expired subscription

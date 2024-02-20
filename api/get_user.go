@@ -9,16 +9,16 @@ import (
 
 type GetUser struct{}
 
-func (GetUser) Body() (RequestBody, error) {
-	return nil, nil
+func (GetUser) Body() RequestBody {
+	return nil
 }
 
-func (GetUser) Query() (QueryParams, error) {
-	return nil, nil
+func (GetUser) Query() QueryParams {
+	return nil
 }
 
-func (GetUser) Headers() (Headers, error) {
-	return nil, nil
+func (GetUser) Headers() Headers {
+	return nil
 }
 
 // GetUser returns a user with a specified username.

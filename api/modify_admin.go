@@ -9,16 +9,16 @@ import (
 
 type ModifyAdmin models.AdminModify
 
-func (c ModifyAdmin) Body() (RequestBody, error) {
-	return models.AdminModify(c), nil
+func (c ModifyAdmin) Body() RequestBody {
+	return models.AdminModify(c)
 }
 
-func (ModifyAdmin) Query() (QueryParams, error) {
-	return nil, nil
+func (ModifyAdmin) Query() QueryParams {
+	return nil
 }
 
-func (ModifyAdmin) Headers() (Headers, error) {
-	return nil, nil
+func (ModifyAdmin) Headers() Headers {
+	return nil
 }
 
 // ModifyAdmin modifies an admin with a specified username and returns a resulting admin.

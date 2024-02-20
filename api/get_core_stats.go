@@ -8,16 +8,16 @@ import (
 
 type GetCoreStats struct{}
 
-func (GetCoreStats) Body() (RequestBody, error) {
-	return nil, nil
+func (GetCoreStats) Body() RequestBody {
+	return nil
 }
 
-func (GetCoreStats) Query() (QueryParams, error) {
-	return nil, nil
+func (GetCoreStats) Query() QueryParams {
+	return nil
 }
 
-func (GetCoreStats) Headers() (Headers, error) {
-	return nil, nil
+func (GetCoreStats) Headers() Headers {
+	return nil
 }
 
 // GetCoreStats returns core stats.

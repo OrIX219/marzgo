@@ -8,16 +8,16 @@ import (
 
 type ModifyHosts models.HostsModify
 
-func (p ModifyHosts) Body() (RequestBody, error) {
-	return models.HostsModify(p), nil
+func (p ModifyHosts) Body() RequestBody {
+	return models.HostsModify(p)
 }
 
-func (ModifyHosts) Query() (QueryParams, error) {
-	return nil, nil
+func (ModifyHosts) Query() QueryParams {
+	return nil
 }
 
-func (ModifyHosts) Headers() (Headers, error) {
-	return nil, nil
+func (ModifyHosts) Headers() Headers {
+	return nil
 }
 
 // ModifyHosts modifies hosts for each specified inbound and returns resulting hosts

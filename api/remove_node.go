@@ -6,16 +6,16 @@ import (
 
 type RemoveNode struct{}
 
-func (c RemoveNode) Body() (RequestBody, error) {
-	return nil, nil
+func (c RemoveNode) Body() RequestBody {
+	return nil
 }
 
-func (RemoveNode) Query() (QueryParams, error) {
-	return nil, nil
+func (RemoveNode) Query() QueryParams {
+	return nil
 }
 
-func (c RemoveNode) Headers() (Headers, error) {
-	return nil, nil
+func (c RemoveNode) Headers() Headers {
+	return nil
 }
 
 // RemoveNode removes a node with a specified id.

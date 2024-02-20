@@ -8,16 +8,16 @@ import (
 
 type AddUser models.UserCreate
 
-func (c AddUser) Body() (RequestBody, error) {
-	return models.UserCreate(c), nil
+func (c AddUser) Body() RequestBody {
+	return models.UserCreate(c)
 }
 
-func (AddUser) Query() (QueryParams, error) {
-	return nil, nil
+func (AddUser) Query() QueryParams {
+	return nil
 }
 
-func (c AddUser) Headers() (Headers, error) {
-	return nil, nil
+func (c AddUser) Headers() Headers {
+	return nil
 }
 
 // AddUser adds a new user with specified params and returns a resulting user.

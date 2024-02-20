@@ -11,20 +11,20 @@ type GetUserTemplates struct {
 	Limit  int
 }
 
-func (GetUserTemplates) Body() (RequestBody, error) {
-	return nil, nil
+func (GetUserTemplates) Body() RequestBody {
+	return nil
 }
 
-func (p GetUserTemplates) Query() (QueryParams, error) {
+func (p GetUserTemplates) Query() QueryParams {
 	params := make(QueryParams)
 	params.AddIntNonZero("offset", p.Offset)
 	params.AddIntNonZero("limit", p.Limit)
 
-	return params, nil
+	return params
 }
 
-func (GetUserTemplates) Headers() (Headers, error) {
-	return nil, nil
+func (GetUserTemplates) Headers() Headers {
+	return nil
 }
 
 // GetUserTemplates returns all user templates.

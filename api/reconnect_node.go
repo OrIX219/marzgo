@@ -6,16 +6,16 @@ import (
 
 type ReconnectNode struct{}
 
-func (c ReconnectNode) Body() (RequestBody, error) {
-	return nil, nil
+func (c ReconnectNode) Body() RequestBody {
+	return nil
 }
 
-func (ReconnectNode) Query() (QueryParams, error) {
-	return nil, nil
+func (ReconnectNode) Query() QueryParams {
+	return nil
 }
 
-func (c ReconnectNode) Headers() (Headers, error) {
-	return nil, nil
+func (c ReconnectNode) Headers() Headers {
+	return nil
 }
 
 // ReconnectNode reconnects main server to a node with a specified id.

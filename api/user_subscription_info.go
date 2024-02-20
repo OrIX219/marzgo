@@ -9,16 +9,16 @@ import (
 
 type UserSubscriptionInfo struct{}
 
-func (UserSubscriptionInfo) Body() (RequestBody, error) {
-	return nil, nil
+func (UserSubscriptionInfo) Body() RequestBody {
+	return nil
 }
 
-func (UserSubscriptionInfo) Query() (QueryParams, error) {
-	return nil, nil
+func (UserSubscriptionInfo) Query() QueryParams {
+	return nil
 }
 
-func (UserSubscriptionInfo) Headers() (Headers, error) {
-	return nil, nil
+func (UserSubscriptionInfo) Headers() Headers {
+	return nil
 }
 
 // UserSubscriptionInfo returns a user corresponding to a specified sub token.

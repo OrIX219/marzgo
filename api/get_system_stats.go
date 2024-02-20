@@ -8,16 +8,16 @@ import (
 
 type GetSystemStats struct{}
 
-func (GetSystemStats) Body() (RequestBody, error) {
-	return nil, nil
+func (GetSystemStats) Body() RequestBody {
+	return nil
 }
 
-func (GetSystemStats) Query() (QueryParams, error) {
-	return nil, nil
+func (GetSystemStats) Query() QueryParams {
+	return nil
 }
 
-func (GetSystemStats) Headers() (Headers, error) {
-	return nil, nil
+func (GetSystemStats) Headers() Headers {
+	return nil
 }
 
 // GetSystemStats returns system stats.

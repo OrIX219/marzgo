@@ -12,21 +12,21 @@ type GetAdmins struct {
 	Username string
 }
 
-func (GetAdmins) Body() (RequestBody, error) {
-	return nil, nil
+func (GetAdmins) Body() RequestBody {
+	return nil
 }
 
-func (p GetAdmins) Query() (QueryParams, error) {
+func (p GetAdmins) Query() QueryParams {
 	params := make(QueryParams)
 	params.AddIntNonZero("offset", p.Offset)
 	params.AddIntNonZero("limit", p.Limit)
 	params.AddStringNonEmpty("username", p.Username)
 
-	return params, nil
+	return params
 }
 
-func (GetAdmins) Headers() (Headers, error) {
-	return nil, nil
+func (GetAdmins) Headers() Headers {
+	return nil
 }
 
 // GetAdmins returns all admins offseted and limited by params.

@@ -9,16 +9,16 @@ import (
 
 type GetUserTemplate struct{}
 
-func (GetUserTemplate) Body() (RequestBody, error) {
-	return nil, nil
+func (GetUserTemplate) Body() RequestBody {
+	return nil
 }
 
-func (p GetUserTemplate) Query() (QueryParams, error) {
-	return nil, nil
+func (p GetUserTemplate) Query() QueryParams {
+	return nil
 }
 
-func (GetUserTemplate) Headers() (Headers, error) {
-	return nil, nil
+func (GetUserTemplate) Headers() Headers {
+	return nil
 }
 
 // GetUserTemplate returns a user template with a specified id.

@@ -11,19 +11,19 @@ type SetUserOwner struct {
 	AdminUsername string
 }
 
-func (SetUserOwner) Body() (RequestBody, error) {
-	return nil, nil
+func (SetUserOwner) Body() RequestBody {
+	return nil
 }
 
-func (p SetUserOwner) Query() (QueryParams, error) {
+func (p SetUserOwner) Query() QueryParams {
 	params := make(QueryParams)
 	params.AddStringNonEmpty("admin_username", p.AdminUsername)
 
-	return params, nil
+	return params
 }
 
-func (SetUserOwner) Headers() (Headers, error) {
-	return nil, nil
+func (SetUserOwner) Headers() Headers {
+	return nil
 }
 
 // SetUserOwner changes owner of a user with a specified username.

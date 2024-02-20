@@ -32,20 +32,8 @@ type Client struct {
 //
 // Returns response in raw json.
 func (c *Client) Request(method, endpoint string, params Params) (json.RawMessage, error) {
-	reqBody, err := params.Body()
-	if err != nil {
-		return nil, err
-	}
-	queryParams, err := params.Query()
-	if err != nil {
-		return nil, err
-	}
-	reqHeaders, err := params.Headers()
-	if err != nil {
-		return nil, err
-	}
 	return c.MakeRequest(method, endpoint, ContentTypeJson,
-		reqBody, queryParams, reqHeaders)
+		params.Body(), params.Query(), params.Headers())
 }
 
 func (c *Client) addAuthHeader(req *http.Request) {

@@ -8,16 +8,16 @@ import (
 
 type GetNodeSettings struct{}
 
-func (GetNodeSettings) Body() (RequestBody, error) {
-	return nil, nil
+func (GetNodeSettings) Body() RequestBody {
+	return nil
 }
 
-func (GetNodeSettings) Query() (QueryParams, error) {
-	return nil, nil
+func (GetNodeSettings) Query() QueryParams {
+	return nil
 }
 
-func (GetNodeSettings) Headers() (Headers, error) {
-	return nil, nil
+func (GetNodeSettings) Headers() Headers {
+	return nil
 }
 
 // GetNodeSettings returns node settings.

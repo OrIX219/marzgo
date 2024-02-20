@@ -2,16 +2,16 @@ package api
 
 type ResetUsersDataUsage struct{}
 
-func (c ResetUsersDataUsage) Body() (RequestBody, error) {
-	return nil, nil
+func (c ResetUsersDataUsage) Body() RequestBody {
+	return nil
 }
 
-func (ResetUsersDataUsage) Query() (QueryParams, error) {
-	return nil, nil
+func (ResetUsersDataUsage) Query() QueryParams {
+	return nil
 }
 
-func (c ResetUsersDataUsage) Headers() (Headers, error) {
-	return nil, nil
+func (c ResetUsersDataUsage) Headers() Headers {
+	return nil
 }
 
 // ResetUsersDataUsage resets data usage of all users.

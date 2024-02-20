@@ -8,16 +8,16 @@ import (
 
 type ModifyCoreConfig models.CoreConfigModify
 
-func (p ModifyCoreConfig) Body() (RequestBody, error) {
-	return models.CoreConfigModify(p), nil
+func (p ModifyCoreConfig) Body() RequestBody {
+	return models.CoreConfigModify(p)
 }
 
-func (ModifyCoreConfig) Query() (QueryParams, error) {
-	return nil, nil
+func (ModifyCoreConfig) Query() QueryParams {
+	return nil
 }
 
-func (ModifyCoreConfig) Headers() (Headers, error) {
-	return nil, nil
+func (ModifyCoreConfig) Headers() Headers {
+	return nil
 }
 
 // ModifyCoreConfig sets core config to provided one and returns it back.

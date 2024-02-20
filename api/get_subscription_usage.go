@@ -13,20 +13,20 @@ type GetSubscriptionUsage struct {
 	End   time.Time
 }
 
-func (p GetSubscriptionUsage) Body() (RequestBody, error) {
-	return nil, nil
+func (p GetSubscriptionUsage) Body() RequestBody {
+	return nil
 }
 
-func (p GetSubscriptionUsage) Query() (QueryParams, error) {
+func (p GetSubscriptionUsage) Query() QueryParams {
 	params := make(QueryParams)
 	params.AddTimeNonZero("start", p.Start)
 	params.AddTimeNonZero("end", p.End)
 
-	return params, nil
+	return params
 }
 
-func (GetSubscriptionUsage) Headers() (Headers, error) {
-	return nil, nil
+func (GetSubscriptionUsage) Headers() Headers {
+	return nil
 }
 
 // GetSubscriptionUsage returns data usage of a sub with specified token

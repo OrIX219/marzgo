@@ -8,16 +8,16 @@ import (
 
 type AddNode models.NodeCreate
 
-func (c AddNode) Body() (RequestBody, error) {
-	return models.NodeCreate(c), nil
+func (c AddNode) Body() RequestBody {
+	return models.NodeCreate(c)
 }
 
-func (AddNode) Query() (QueryParams, error) {
-	return nil, nil
+func (AddNode) Query() QueryParams {
+	return nil
 }
 
-func (c AddNode) Headers() (Headers, error) {
-	return nil, nil
+func (c AddNode) Headers() Headers {
+	return nil
 }
 
 // AddNode adds a new Marzban node with specified params and

@@ -6,16 +6,16 @@ import (
 
 type RemoveAdmin struct{}
 
-func (RemoveAdmin) Body() (RequestBody, error) {
-	return nil, nil
+func (RemoveAdmin) Body() RequestBody {
+	return nil
 }
 
-func (RemoveAdmin) Query() (QueryParams, error) {
-	return nil, nil
+func (RemoveAdmin) Query() QueryParams {
+	return nil
 }
 
-func (RemoveAdmin) Headers() (Headers, error) {
-	return nil, nil
+func (RemoveAdmin) Headers() Headers {
+	return nil
 }
 
 // RemoveAdmin removes an admin with a specified username.

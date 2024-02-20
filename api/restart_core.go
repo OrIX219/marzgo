@@ -2,16 +2,16 @@ package api
 
 type RestartCore struct{}
 
-func (RestartCore) Body() (RequestBody, error) {
-	return nil, nil
+func (RestartCore) Body() RequestBody {
+	return nil
 }
 
-func (RestartCore) Query() (QueryParams, error) {
-	return nil, nil
+func (RestartCore) Query() QueryParams {
+	return nil
 }
 
-func (RestartCore) Headers() (Headers, error) {
-	return nil, nil
+func (RestartCore) Headers() Headers {
+	return nil
 }
 
 // RestartCore restarts core.

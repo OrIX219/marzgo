@@ -8,16 +8,16 @@ import (
 
 type GetInbounds struct{}
 
-func (GetInbounds) Body() (RequestBody, error) {
-	return nil, nil
+func (GetInbounds) Body() RequestBody {
+	return nil
 }
 
-func (GetInbounds) Query() (QueryParams, error) {
-	return nil, nil
+func (GetInbounds) Query() QueryParams {
+	return nil
 }
 
-func (GetInbounds) Headers() (Headers, error) {
-	return nil, nil
+func (GetInbounds) Headers() Headers {
+	return nil
 }
 
 // GetInbounds returns all inbounds divided in protocols.

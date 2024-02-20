@@ -12,20 +12,20 @@ type GetNodesUsage struct {
 	End   time.Time
 }
 
-func (p GetNodesUsage) Body() (RequestBody, error) {
-	return nil, nil
+func (p GetNodesUsage) Body() RequestBody {
+	return nil
 }
 
-func (p GetNodesUsage) Query() (QueryParams, error) {
+func (p GetNodesUsage) Query() QueryParams {
 	params := make(QueryParams)
 	params.AddTimeNonZero("start", p.Start)
 	params.AddTimeNonZero("end", p.End)
 
-	return params, nil
+	return params
 }
 
-func (GetNodesUsage) Headers() (Headers, error) {
-	return nil, nil
+func (GetNodesUsage) Headers() Headers {
+	return nil
 }
 
 // GetNodesUsage returns usages of nodes for a specified period of time (default all time).

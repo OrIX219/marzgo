@@ -9,16 +9,16 @@ import (
 
 type ResetUserDataUsage struct{}
 
-func (c ResetUserDataUsage) Body() (RequestBody, error) {
-	return nil, nil
+func (c ResetUserDataUsage) Body() RequestBody {
+	return nil
 }
 
-func (ResetUserDataUsage) Query() (QueryParams, error) {
-	return nil, nil
+func (ResetUserDataUsage) Query() QueryParams {
+	return nil
 }
 
-func (c ResetUserDataUsage) Headers() (Headers, error) {
-	return nil, nil
+func (c ResetUserDataUsage) Headers() Headers {
+	return nil
 }
 
 // ResetUserDataUsage resets data usage of a user with a specified username and returns that user.

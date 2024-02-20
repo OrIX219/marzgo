@@ -6,16 +6,16 @@ import (
 
 type RemoveUser struct{}
 
-func (RemoveUser) Body() (RequestBody, error) {
-	return nil, nil
+func (RemoveUser) Body() RequestBody {
+	return nil
 }
 
-func (RemoveUser) Query() (QueryParams, error) {
-	return nil, nil
+func (RemoveUser) Query() QueryParams {
+	return nil
 }
 
-func (RemoveUser) Headers() (Headers, error) {
-	return nil, nil
+func (RemoveUser) Headers() Headers {
+	return nil
 }
 
 // RemoveUser removes a user with a specified username.

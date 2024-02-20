@@ -8,16 +8,16 @@ import (
 
 type AddUserTemplate models.UserTemplateCreate
 
-func (c AddUserTemplate) Body() (RequestBody, error) {
-	return models.UserTemplateCreate(c), nil
+func (c AddUserTemplate) Body() RequestBody {
+	return models.UserTemplateCreate(c)
 }
 
-func (AddUserTemplate) Query() (QueryParams, error) {
-	return nil, nil
+func (AddUserTemplate) Query() QueryParams {
+	return nil
 }
 
-func (c AddUserTemplate) Headers() (Headers, error) {
-	return nil, nil
+func (c AddUserTemplate) Headers() Headers {
+	return nil
 }
 
 // AddUserTemplate adds a new user template with specified params and

@@ -13,20 +13,20 @@ type GetUserUsage struct {
 	End   time.Time
 }
 
-func (p GetUserUsage) Body() (RequestBody, error) {
-	return nil, nil
+func (p GetUserUsage) Body() RequestBody {
+	return nil
 }
 
-func (p GetUserUsage) Query() (QueryParams, error) {
+func (p GetUserUsage) Query() QueryParams {
 	params := make(QueryParams)
 	params.AddTimeNonZero("start", p.Start)
 	params.AddTimeNonZero("end", p.End)
 
-	return params, nil
+	return params
 }
 
-func (GetUserUsage) Headers() (Headers, error) {
-	return nil, nil
+func (GetUserUsage) Headers() Headers {
+	return nil
 }
 
 // GetUserUsage returns user's data usage for each node

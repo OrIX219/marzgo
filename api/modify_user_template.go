@@ -9,16 +9,16 @@ import (
 
 type ModifyUserTemplate models.UserTemplateModify
 
-func (c ModifyUserTemplate) Body() (RequestBody, error) {
-	return models.UserTemplateModify(c), nil
+func (c ModifyUserTemplate) Body() RequestBody {
+	return models.UserTemplateModify(c)
 }
 
-func (ModifyUserTemplate) Query() (QueryParams, error) {
-	return nil, nil
+func (ModifyUserTemplate) Query() QueryParams {
+	return nil
 }
 
-func (c ModifyUserTemplate) Headers() (Headers, error) {
-	return nil, nil
+func (c ModifyUserTemplate) Headers() Headers {
+	return nil
 }
 
 // ModifyUserTemplate modifies a user template with a specified id and returns a resulting template.

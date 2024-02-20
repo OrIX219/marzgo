@@ -10,20 +10,20 @@ type GetExpiredUsers struct {
 	ExpiredAfter  time.Time
 }
 
-func (GetExpiredUsers) Body() (RequestBody, error) {
-	return nil, nil
+func (GetExpiredUsers) Body() RequestBody {
+	return nil
 }
 
-func (p GetExpiredUsers) Query() (QueryParams, error) {
+func (p GetExpiredUsers) Query() QueryParams {
 	params := make(QueryParams)
 	params.AddTimeNonZero("expired_before", p.ExpiredBefore)
 	params.AddTimeNonZero("expired_after", p.ExpiredAfter)
 
-	return params, nil
+	return params
 }
 
-func (GetExpiredUsers) Headers() (Headers, error) {
-	return nil, nil
+func (GetExpiredUsers) Headers() Headers {
+	return nil
 }
 
 // GetExpiredUsers returns usernames of all users
