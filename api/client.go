@@ -7,6 +7,8 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/OrIX219/marzgo/api/errors"
 )
@@ -22,9 +24,72 @@ type Client struct {
 
 	Username string
 	Password string
-	Token    string
+
+	token      string
+	tokenMutex sync.RWMutex
+
+	refreshTokenTicker *time.Ticker
+	refreshTokenErrs   chan error
 
 	HTTPClient HTTPClient
+}
+
+// NewClient creates a new instance of Client
+func NewClient(apiBase, username, password string, client HTTPClient) Client {
+	return Client{
+		APIBaseUrl: apiBase,
+		Username:   username,
+		Password:   password,
+		HTTPClient: client,
+	}
+}
+
+// RefreshTokenEvery starts a goroutine which will request a new admin token
+// every duration and set it to current Client instance.
+// If the goroutine was already started then it will just update the refresh period.
+func (c *Client) RefreshTokenEvery(duration time.Duration) <-chan error {
+	if c.refreshTokenTicker == nil {
+		c.refreshTokenTicker = time.NewTicker(duration)
+		c.refreshTokenErrs = make(chan error)
+		go c.refreshToken(c.refreshTokenErrs)
+	} else {
+		c.refreshTokenTicker.Reset(duration)
+	}
+	return c.refreshTokenErrs
+}
+
+// StopRefreshingToken stops token refreshing.
+func (c *Client) StopRefreshingToken() {
+	c.refreshTokenTicker.Stop()
+}
+
+func (c *Client) refreshToken(errChan chan<- error) {
+	for {
+		select {
+		case <-c.refreshTokenTicker.C:
+			token, err := c.AdminToken()
+			if err != nil {
+				errChan <- err
+			} else {
+				c.SetToken(token.AccessToken)
+			}
+		}
+	}
+}
+
+// SetToken sets an admin token to the current client instance in a concurrency safe way
+func (c *Client) SetToken(token string) {
+	c.tokenMutex.Lock()
+	c.token = token
+	c.tokenMutex.Unlock()
+}
+
+// Token returns an admin token stored in the current client instance
+func (c *Client) Token() string {
+	c.tokenMutex.RLock()
+	tmp := c.token
+	c.tokenMutex.RUnlock()
+	return tmp
 }
 
 // A wrapper for MakeRequest.
@@ -37,10 +102,12 @@ func (c *Client) Request(method, endpoint string, params Params) (json.RawMessag
 }
 
 func (c *Client) addAuthHeader(req *http.Request) {
-	if c.Token == "" {
+	c.tokenMutex.RLock()
+	defer c.tokenMutex.RUnlock()
+	if c.token == "" {
 		return
 	}
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.Token))
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.token))
 }
 
 // MakeRequest makes a request to specified endpoint using specified http method

@@ -32,20 +32,14 @@ func NewMarzbanAPIWithHTTP(apiBaseURL, username, password string, httpClient api
 		apiBaseURL += "/"
 	}
 	marzban := &MarzbanAPI{
-		Client: api.Client{
-			APIBaseUrl: apiBaseURL,
-			Username:   username,
-			Password:   password,
-			HTTPClient: httpClient,
-		},
+		Client: api.NewClient(apiBaseURL, username, password, httpClient),
 	}
 
 	token, err := marzban.AdminToken()
 	if err != nil {
 		return nil, err
 	}
-
-	marzban.Client.Token = token.AccessToken
+	marzban.SetToken(token.AccessToken)
 
 	return marzban, nil
 }
